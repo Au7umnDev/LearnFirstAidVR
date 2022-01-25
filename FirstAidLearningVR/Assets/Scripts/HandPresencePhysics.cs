@@ -52,7 +52,7 @@ public class HandPresencePhysics : MonoBehaviour
     void FixedUpdate()
     {
         //Position
-        rb.velocity = (target.position - transform.position) / Time.fixedDeltaTime;
+        rb.velocity = (target.position - transform.position) / Time.fixedDeltaTime * 4 / 10;
 
         //Rotation
         Quaternion rotationDifference = target.rotation * Quaternion.Inverse(transform.rotation);
@@ -60,6 +60,6 @@ public class HandPresencePhysics : MonoBehaviour
 
         Vector3 rotationDifferenceInDegree = angleInDegrees * rotationAxis;
 
-        rb.angularVelocity = (rotationDifferenceInDegree * Mathf.Deg2Rad / Time.fixedDeltaTime);
+        rb.angularVelocity = (rotationDifferenceInDegree * Mathf.Deg2Rad / Time.fixedDeltaTime * 4 / 10);
     }
 }
