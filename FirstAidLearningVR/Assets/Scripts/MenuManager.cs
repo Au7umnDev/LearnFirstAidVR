@@ -2,59 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.UI;
+
 public class MenuManager : MonoBehaviour
 {
-    public XRNode inputSource;
-    public Panel currentPanel = null;
-    public bool gripValue = false;
+    public List<GameObject> pages = new List<GameObject>();
 
-    private List<Panel> panelHistory = new List<Panel>();
+    public Text pageCounter;
+
+    private int pageIterator;
 
     private void Start()
     {
-        SetupPanels();
+        pageIterator = 0;
     }
 
-    private void SetupPanels()
+    public void GoToPreviousPage()
     {
-        Panel[] panels = GetComponentsInChildren<Panel>();
-
-        foreach (Panel panel in panels)
-            panel.Setup(this);
-
-        currentPanel.Show();
-    }
-
-    private void Update()
-    {
-        InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
-        if (device.TryGetFeatureValue(CommonUsages.gripButton, out gripValue) && gripValue)
-            GoToPrevious();
-    }
-
-    public void GoToPrevious()
-    {
-        if(panelHistory.Count == 0)
+        if (pageIterator == 0)
         {
-            Application.Quit();
             return;
         }
-        int lastIndex = panelHistory.Count - 1;
-        SetCurrent(panelHistory[lastIndex]);
-        panelHistory.RemoveAt(lastIndex);
+
+        pages[pageIterator].SetActive(false);
+
+        pageCounter.text = "Страница " + pageIterator + " из 3";
+
+        pageIterator--;
+
+        pages[pageIterator].SetActive(true);
     }
 
-    public void SetCurrentWithHistory(Panel newPanel)
+    public void GoToNextPage()
     {
-        panelHistory.Add(currentPanel);
-        SetCurrent(newPanel);
+        if (pageIterator == 2)
+        {
+            return;
+        }
+
+        pages[pageIterator].SetActive(false);
+
+        pageIterator++;
+
+        pageIterator++;
+        pageCounter.text = "Страница " + pageIterator + " из 3";
+        pageIterator--;
+
+        pages[pageIterator].SetActive(true);
     }
 
-    private void SetCurrent(Panel newPanel)
-    {
-        currentPanel.Hide();
-
-        currentPanel = newPanel;
-        currentPanel.Show();
-    }
 }
