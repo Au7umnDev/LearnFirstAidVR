@@ -20,10 +20,10 @@ public class MainMenuManager : MonoBehaviour
     }
     public void OpenMainMenu()
     {
-        if (practice.activeSelf)
+        if (practice.activeSelf == true)
             practice.SetActive(false);
 
-        if (theory.activeSelf)
+        if (theory.activeSelf == true)
             theory.SetActive(false);
 
         main.SetActive(true);
