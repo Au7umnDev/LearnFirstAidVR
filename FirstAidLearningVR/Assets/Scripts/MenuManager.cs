@@ -10,6 +10,11 @@ public class MenuManager : MonoBehaviour
 
     public Text pageCounter;
 
+    public GameObject arrowPrevious;
+    public GameObject arrowNext;
+
+    public GameObject completedMark;
+
     private int pageIterator;
 
     private void Start()
@@ -24,20 +29,35 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
+        if(arrowNext.activeSelf == false)
+        {
+            arrowNext.SetActive(true);
+        }
+
         pages[pageIterator].SetActive(false);
 
-        pageCounter.text = "Страница " + pageIterator + " из 3";
+        pageCounter.text = "Страница " + pageIterator + " из " + pages.Count;
 
         pageIterator--;
+
+        if (pageIterator == 0)
+        {
+            arrowPrevious.SetActive(false);
+        }
 
         pages[pageIterator].SetActive(true);
     }
 
     public void GoToNextPage()
     {
-        if (pageIterator == 2)
+        if (pageIterator == pages.Count - 1)
         {
             return;
+        }
+
+        if (arrowPrevious.activeSelf == false)
+        {
+            arrowPrevious.SetActive(true);
         }
 
         pages[pageIterator].SetActive(false);
@@ -45,10 +65,28 @@ public class MenuManager : MonoBehaviour
         pageIterator++;
 
         pageIterator++;
-        pageCounter.text = "Страница " + pageIterator + " из 3";
+        pageCounter.text = "Страница " + pageIterator + " из " + pages.Count;
         pageIterator--;
+
+        if (pageIterator == pages.Count - 1)
+        {
+            arrowNext.SetActive(false);
+        }
 
         pages[pageIterator].SetActive(true);
     }
 
+    public void ClosePage()
+    {
+        if(pageIterator != 0)
+        {
+            pages[pageIterator].SetActive(false);
+
+            pageIterator = 1;
+            pageCounter.text = "Страница " + pageIterator + " из " + pages.Count;
+            pageIterator--;
+
+            pages[pageIterator].SetActive(true);
+        }
+    }
 }
