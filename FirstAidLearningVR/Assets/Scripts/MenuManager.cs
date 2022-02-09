@@ -71,6 +71,7 @@ public class MenuManager : MonoBehaviour
         if (pageIterator == pages.Count - 1)
         {
             arrowNext.SetActive(false);
+            completedMark.SetActive(true);
         }
 
         pages[pageIterator].SetActive(true);
