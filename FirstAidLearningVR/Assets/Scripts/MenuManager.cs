@@ -64,6 +64,8 @@ public class MenuManager : MonoBehaviour
 
         pageIterator++;
 
+        pages[pageIterator].SetActive(true);
+
         pageIterator++;
         pageCounter.text = "Страница " + pageIterator + " из " + pages.Count;
         pageIterator--;
@@ -73,8 +75,6 @@ public class MenuManager : MonoBehaviour
             arrowNext.SetActive(false);
             completedMark.SetActive(true);
         }
-
-        pages[pageIterator].SetActive(true);
     }
 
     public void ClosePage()
@@ -88,6 +88,9 @@ public class MenuManager : MonoBehaviour
             pageIterator--;
 
             pages[pageIterator].SetActive(true);
+
+            arrowPrevious.SetActive(false);
+            arrowNext.SetActive(true);
         }
     }
 }
