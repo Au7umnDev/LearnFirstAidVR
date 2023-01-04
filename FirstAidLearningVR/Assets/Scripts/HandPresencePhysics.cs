@@ -10,7 +10,6 @@ public class HandPresencePhysics : MonoBehaviour
     public float showNonPhysicalHandDistance = 0.05f;
     private Collider[] handColliders;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,13 +47,10 @@ public class HandPresencePhysics : MonoBehaviour
             nonPhysicalHand.enabled = false;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //Position
         rb.velocity = (target.position - transform.position) / Time.fixedDeltaTime * 4 / 10;
 
-        //Rotation
         Quaternion rotationDifference = target.rotation * Quaternion.Inverse(transform.rotation);
         rotationDifference.ToAngleAxis(out float angleInDegrees, out Vector3 rotationAxis);
 

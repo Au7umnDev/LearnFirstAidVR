@@ -12,7 +12,6 @@ public class Panel : MonoBehaviour
         canvas = GetComponent<Canvas>();
     }
 
-    // Update is called once per frame
     public void Setup(MenuManager menuManager)
     {
         this.menuManager = menuManager;

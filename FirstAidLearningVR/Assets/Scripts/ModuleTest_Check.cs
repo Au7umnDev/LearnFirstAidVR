@@ -7,6 +7,7 @@ public class ModuleTest_Check : MonoBehaviour
     public GameObject completedMark;
     public GameObject practiceModule;
     public GameObject mainModule;
+    public GameObject simulationPage;
 
     public void CheckTest()
     {
@@ -14,6 +15,7 @@ public class ModuleTest_Check : MonoBehaviour
         {
             practiceModule.SetActive(false);
             mainModule.SetActive(true);
+            simulationPage.SetActive(true);
             return;
         }
         else
